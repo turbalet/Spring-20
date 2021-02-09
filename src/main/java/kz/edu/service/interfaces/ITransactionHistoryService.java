@@ -1,4 +1,6 @@
 package kz.edu.service.interfaces;
 
-public interface ITransactionHistoryService {
+import kz.edu.model.TransactionHistory;
+
+public interface ITransactionHistoryService extends IEntityService<TransactionHistory>{
 }

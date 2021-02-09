@@ -60,14 +60,14 @@ public class TransferController {
                            @RequestParam("accountNumber") String receiverNum,
                            @RequestParam("amount") String amount,
                            @RequestParam("type") String type,
-                           @RequestParam("favourite") String favourite,
+                           @RequestParam(value = "favourite", required = false) String favourite,
                            Model model, Principal principal) throws Exception {
         User user  = userService.getUserByEmail(principal.getName());
         Account sender = accountService.getAccountDetails(user, Integer.parseInt(id));
         Account receiver = accountService.getAccountByNum(receiverNum);
         transactionService.transfer(sender, receiver, Double.parseDouble(amount), type);
         if(favourite!=null){
-            favouriteService.add(user,receiverNum);
+            favouriteService.addUserFav(user,receiverNum);
         }
         model.addAttribute("message", "Successfully");
         return loadForm(model, principal);

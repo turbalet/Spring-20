@@ -36,4 +36,29 @@ public class TransactionHistoryService implements ITransactionHistoryService {
     public void save(TransactionHistory transactionHistory){
         transactionHistoryRepository.save(transactionHistory);
     }
+
+    @Override
+    public void add(TransactionHistory entity) {
+        transactionHistoryRepository.save(entity);
+    }
+
+    @Override
+    public void update(TransactionHistory entity) {
+        transactionHistoryRepository.save(entity);
+    }
+
+    @Override
+    public List<TransactionHistory> getAll() {
+        return transactionHistoryRepository.findAll();
+    }
+
+    @Override
+    public TransactionHistory getById(int id) {
+        return transactionHistoryRepository.getOne(id);
+    }
+
+    @Override
+    public void delete(int id) {
+        transactionHistoryRepository.deleteById(id);
+    }
 }

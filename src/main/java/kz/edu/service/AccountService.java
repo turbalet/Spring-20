@@ -34,7 +34,27 @@ public class AccountService implements IAccountService {
         return accountRepository.findAccountsByUserId(id);
     }
 
+    @Override
+    public void add(Account entity) {
+        accountRepository.save(entity);
+    }
+
     public void update(Account account){
         accountRepository.save(account);
+    }
+
+    @Override
+    public List<Account> getAll() {
+        return accountRepository.findAll();
+    }
+
+    @Override
+    public Account getById(int id) {
+        return accountRepository.getOne(id);
+    }
+
+    @Override
+    public void delete(int id) {
+        accountRepository.deleteById(id);
     }
 }

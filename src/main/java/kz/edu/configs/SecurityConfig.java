@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/transfer").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/details/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/books/**").hasRole("ADMIN")
+                .antMatchers("/api/**").hasRole("ADMIN")
                 .antMatchers("/profile").hasAuthority("read")
                 .antMatchers("/arrivals").hasAuthority("edit")
             .and()
