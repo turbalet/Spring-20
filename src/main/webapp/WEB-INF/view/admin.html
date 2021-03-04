@@ -4,7 +4,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="img/favicon.png" type="image/png">
     <title>Favison SAAS</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -206,11 +205,11 @@ table.table .avatar {
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="profilePage.html">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="admin.html">Admin page</a></li>
-                        <li class="nav-item"><a class="nav-link" href="question.html">Voting</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/">Ststistic</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/admin">Admin page</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/voting">Voting</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/">Statistic</a></li>
                     </ul>
                 </div>
                 <div class="right-button">
@@ -265,7 +264,7 @@ table.table .avatar {
                     <td>SE-1963</td>
                     <td>Admin</td>
                     <td>
-                        <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                        <a href="/editUser" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
                         <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
@@ -275,7 +274,7 @@ table.table .avatar {
                     <td>TS-1923</td>
                     <td>Student</td>
                     <td>
-                        <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                        <a href="/editUser" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
                         <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
@@ -325,7 +324,7 @@ table.table .avatar {
                     <td>C</td>
                     <td>D</td>
                     <td>
-                        <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                        <a href="/edit" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
                         <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
@@ -337,8 +336,8 @@ table.table .avatar {
                     <td>The task is to develop a web application</td>
                     <td>The task is to develop a web application</td>
                     <td>
-                        <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
+                        <a href="/edit" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+                        <a href="/delete/{id}" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
 
@@ -357,7 +356,7 @@ table.table .avatar {
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="/examples/actions/confirmation.php" method="post">
+                <form action="/" method="post">
                     <div class="form-group">
 
                         <input type="text" class="form-control" placeholder="Question" required="required">

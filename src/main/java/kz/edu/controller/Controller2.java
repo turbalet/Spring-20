@@ -37,14 +37,26 @@ public class Controller2 {
     public String admin() {
         return "admin";
     }
-    @GetMapping("/profilep")
-    public String profilePage() {
-        return "profilePage";
-    }
+
 
     @GetMapping("/arrivals")
     public String arrivals() {
         return "arrivals";
+    }
+
+    @GetMapping("/edit")
+    public String edit() {
+        return "edit";
+    }
+
+    @GetMapping("/editUser")
+    public String editUserAdmin() {
+        return "editUserAdmin";
+    }
+
+    @GetMapping("/editMyself")
+    public String editUser() {
+        return "editMyself";
     }
 
     @GetMapping("/profile")
