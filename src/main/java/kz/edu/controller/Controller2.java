@@ -31,7 +31,15 @@ public class Controller2 {
 
     @RequestMapping(value = {"", "/", "home"})
     public String home() {
-        return "home";
+        return "index";
+    }
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+    @GetMapping("/profilep")
+    public String profilePage() {
+        return "profilePage";
     }
 
     @GetMapping("/arrivals")
