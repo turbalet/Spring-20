@@ -30,16 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity security) throws Exception
     {
         security.authorizeRequests()
-                .antMatchers( "/registration", "/test").permitAll()
+                .antMatchers( "/registration", "/test", "/api").permitAll()
                 .antMatchers("/","/books").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/home").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/settings").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/transfer").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/payment").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/transfer").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/details/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/books/**").hasRole("ADMIN")
-                .antMatchers("/api/**").hasRole("ADMIN")
                 .antMatchers("/profile").hasAuthority("read")
                 .antMatchers("/arrivals").hasAuthority("edit")
             .and()
@@ -55,7 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Bean
     public PasswordEncoder passwordEncoder()
     {
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder;
+        return new BCryptPasswordEncoder();
     }
 }

@@ -1,6 +1,7 @@
 package kz.edu.model;
 
 import javax.persistence.*;
+import javax.swing.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -21,11 +22,7 @@ public class User implements Serializable
 
     private Date birthday;
 
-    private String phoneNumber;
-
-    private Set<Account> accounts;
-
-    private Set<Favourite> favourites;
+    private Group group;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,15 +65,6 @@ public class User implements Serializable
         this.role = role;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    public Set<Account> getAccounts() { return accounts; }
-    public void setAccounts(Set<Account> accounts) { this.accounts = accounts; }
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    public Set<Favourite> getFavourites() { return favourites; }
-    public void setFavourites(Set<Favourite> favourites) { this.favourites = favourites; }
 
     @Column(name = "first_name")
     public String getFirstName() {
@@ -99,11 +87,8 @@ public class User implements Serializable
         this.birthday = birthday;
     }
 
-    @Column(name = "phone_number")
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "group_id")
+    public Group getGroupId() { return group; }
+    public void setGroupId(Group group) { this.group = group; }
 }

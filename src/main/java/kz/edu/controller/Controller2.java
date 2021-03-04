@@ -14,61 +14,63 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 
 @Controller
-public class Controller2
-{
+public class Controller2 {
     private final UserDAO userDAO;
+
     @Autowired
-    public Controller2(UserDAO userDAO)
-    { this.userDAO = userDAO;}
+    public Controller2(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
     PasswordEncoder passwordEncoder;
+
     @Autowired
-    public void PasswordEncoder(PasswordEncoder passwordEncoder)
-    { this.passwordEncoder = passwordEncoder;}
-    @RequestMapping(value={"", "/", "home"})
-    public String home()
-    {
+    public void PasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @RequestMapping(value = {"", "/", "home"})
+    public String home() {
         return "home";
     }
+
     @GetMapping("/arrivals")
-    public String arrivals()
-    {
+    public String arrivals() {
         return "arrivals";
     }
+
     @GetMapping("/profile")
-    public String profile()
-    {
+    public String profile() {
         return "profile";
     }
+
     @GetMapping("/login")
-    public String login()
-    {
+    public String login() {
         return "login";
     }
+
     @GetMapping("/registration")
-    public String registration()
-    {
+    public String registration() {
         return "registration";
     }
-    @PostMapping("/registration")
-    public String addUser(User user, @RequestParam("username") String email, Model model)
-    {
-        System.out.println("REGISTRATION:"+email);
 
-        if (userDAO.findByUserName(email) != null)
-        {
+    @PostMapping("/registration")
+    public String addUser(User user, @RequestParam("username") String email, Model model) {
+        System.out.println("REGISTRATION:" + email);
+
+        if (userDAO.findByUserName(email) != null) {
             model.addAttribute("message", "User exists!");
             return "registration";
-        }
-        else
-        {
+        } else {
             user.setEmail(email);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userDAO.addUser(user);
             return "redirect:/login";
         }
     }
+
     @GetMapping("/test")
-    public String test(Model model, Principal principal){
+    public String test(Model model, Principal principal) {
         model.addAttribute("info", principal.getName());
         return "test";
     }
