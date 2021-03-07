@@ -89,6 +89,6 @@ public class User implements Serializable
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
-    public Group getGroupId() { return group; }
-    public void setGroupId(Group group) { this.group = group; }
+    public Group getGroup() { return group; }
+    public void setGroup(Group group) { this.group = group; }
 }

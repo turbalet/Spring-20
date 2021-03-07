@@ -24,4 +24,9 @@ public class Answer {
 
     @Column(name = "content")
     private String content;
+
+    public Answer(Question question, String content){
+        this.question = question;
+        this.content = content;
+    }
 }

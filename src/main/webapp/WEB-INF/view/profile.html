@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -16,34 +16,7 @@
 <body>
 
 <!--================Header Menu Area =================-->
-<header class="header_area">
-    <div class="main_menu">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/admin">Admin page</a></li>
-                    </ul>
-                </div>
-                <div class="right-button">
-                    <ul>
-                        <li><a class="sign_up" href="">Sign Up</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
+<div th:replace="header"></div>
 <!--================Header Menu Area =================-->
 
 
@@ -71,8 +44,8 @@
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="data:image/jpeg;base64,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" alt="Admin" class="rounded-circle" width="150">
                             <div class="mt-3">
-                                <h4>Dariya Biga</h4>
-                                <a href="/editMyself"><button class="btn btn-outline-primary">Edit Profile</button></a>
+                                <h4 th:text="${user.getFirstName() + ' ' + user.getLastName()}"></h4>
+                                <a th:href="@{/profile/edit}"><button class="btn btn-outline-primary">Edit Profile</button></a>
                             </div>
                         </div>
                     </div>
@@ -88,7 +61,7 @@
                                 <h6 class="mb-0">First Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                Baby
+                                <p th:text="${user.getFirstName()}"></p>
                             </div>
                         </div>
                         <hr>
@@ -97,65 +70,43 @@
                                 <h6 class="mb-0">Last Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                Last name
+                                <p th:text="${user.getLastName()}"></p>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Group Name</h6>
+                                <h6 class="mb-0">Group</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                SE-1907
+                                <p th:text="${user.getGroup().getName()}"></p>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Age</h6>
+                                <h6 class="mb-0">Birthday</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                19
+                                <p th:text="${#dates.day(user.birthday) + ' ' + #dates.monthNameShort(user.birthday) + ' ' + #dates.year(user.birthday)}"></p>
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Interests</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                Art
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <h3>Last Votes</h3>
 
                 <div class="row gutters-sm">
-                    <div class="col-sm-6 mb-3">
+                    <div class="col-sm-6 mb-3" th:each="vote:${votes}">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3">last vote1</h6>
-                                <small>Answer1</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Answer2</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Answer3</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Answer4</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Answer5</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div>
+                                    <h6 class="d-flex align-items-center mb-3" th:text="${vote.getQuestion().getTitle()}">last vote1</h6>
+                                    <small th:text="${vote.answer.content}"></small>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
