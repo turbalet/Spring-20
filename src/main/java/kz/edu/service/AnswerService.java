@@ -6,6 +6,7 @@ import kz.edu.service.interfaces.IEntityService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -41,5 +42,9 @@ public class AnswerService implements IEntityService<Answer> {
     @Override
     public void delete(long id) {
         answerRepository.deleteById(id);
+    }
+
+    public void deleteByQuestionID(long id){
+        answerRepository.deleteAllByQuestionId(id);
     }
 }

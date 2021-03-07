@@ -39,4 +39,8 @@ public class GroupService implements IEntityService<Group> {
     public void delete(long id) {
         groupRepository.deleteById(id);
     }
+
+    public Group getByName(String name){
+        return groupRepository.getByName(name);
+    }
 }

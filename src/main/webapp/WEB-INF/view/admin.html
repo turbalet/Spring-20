@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!doctype html >
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -24,7 +24,8 @@
 
 </head>
 <body>
-<style>body {
+<style>
+    body {
     color: #566787;
     background: #f5f5f5;
     font-family: 'Varela Round', sans-serif;
@@ -191,34 +192,7 @@ table.table .avatar {
 </script>
 
 <!--================Header Menu Area =================-->
-<header class="header_area">
-    <div class="main_menu">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/admin">Admin page</a></li>
-                    </ul>
-                </div>
-                <div class="right-button">
-                    <ul>
-                        <li><a class="sign_up" href="">Sign Up</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
+<div th:replace="header"></div>
 <!--================Header Menu Area =================-->
 
 
@@ -304,41 +278,21 @@ table.table .avatar {
             <table class="table table-striped table-hover" style="background-color: #f2f2f2;">
                 <thead>
                 <tr>
-                    <th>№</th>
                     <th>Question</th>
-                    <th>Answer 1 </th>
-                    <th>Answer 2</th>
-                    <th>Answer 3</th>
-                    <th>Answer 4</th>
-                    <th>Action</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>The task is to develop a web application – an electronic vote system for students</td>
-                    <td>A</td>
-                    <td>B</td>
-                    <td>C</td>
-                    <td>D</td>
+                <tr th:each="question : ${questions}">
+                    <td th:text="${question.title}"></td>
+                    <td th:text="${#dates.day(question.published) + ' ' + #dates.monthNameShort(question.published) + ' ' + #dates.year(question.published)}">A</td>
+                    <td th:text="${#dates.day(question.endDate) + ' ' + #dates.monthNameShort(question.endDate) + ' ' + #dates.year(question.endDate)}">A</td>
                     <td>
-                        <a href="/edit" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
-                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
+                        <a th:href="@{/admin/question/edit/{id}(id = ${question.id})}" class="settings" title="Edit" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+                        <a href="" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>The task is to develop a web application – an electronic vote system for students</td>
-                    <td>The task is to develop a web application</td>
-                    <td>The task is to develop a web application</td>
-                    <td>The task is to develop a web application</td>
-                    <td>The task is to develop a web application</td>
-                    <td>
-                        <a href="/edit" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
-                        <a href="/delete/{id}" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-
                 </tbody>
             </table>
 
