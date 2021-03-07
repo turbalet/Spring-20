@@ -43,6 +43,11 @@ public class Controller2 {
         return "question";
     }
 
+    @GetMapping("/result")
+    public String result() {
+        return "result";
+    }
+
 
     @GetMapping("/arrivals")
     public String arrivals() {
