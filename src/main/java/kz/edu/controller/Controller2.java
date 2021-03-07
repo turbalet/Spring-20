@@ -39,6 +39,16 @@ public class Controller2 {
         return "admin";
     }
 
+    @GetMapping("/question/{id}")
+    public String question() {
+        return "question";
+    }
+
+    @GetMapping("/result")
+    public String result() {
+        return "result";
+    }
+
 
     @GetMapping("/arrivals")
     public String arrivals() {
