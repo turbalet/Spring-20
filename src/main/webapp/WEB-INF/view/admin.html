@@ -112,9 +112,6 @@ table.table td a.settings {
 table.table td a.delete {
     color: #F44336;
 }
-table.table td i {
-    font-size: 19px;
-}
 table.table .avatar {
     border-radius: 50%;
     vertical-align: middle;
@@ -279,7 +276,7 @@ table.table .avatar {
                 </thead>
                 <tbody>
                 <tr th:each="question : ${questions}">
-                    <td th:text="${question.title}"></td>
+                    <td style="width: 250px" th:text="${question.title}"></td>
                     <td th:text="${#dates.day(question.published) + ' ' + #dates.monthNameShort(question.published) + ' ' + #dates.year(question.published)}">A</td>
                     <td th:text="${#dates.day(question.endDate) + ' ' + #dates.monthNameShort(question.endDate) + ' ' + #dates.year(question.endDate)}">A</td>
                     <td>
