@@ -69,10 +69,14 @@ public class Controller2 {
     public String editUser() {
         return "editMyself";
     }
-
     @GetMapping("/profile")
     public String profile() {
         return "profile";
+    }
+
+    @GetMapping("/change")
+    public String password() {
+        return "changePass";
     }
 
     @GetMapping("/login")

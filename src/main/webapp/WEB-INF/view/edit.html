@@ -33,7 +33,7 @@
             });
 
             $('#add').click(function (){
-                $('.ans').append("<div  class='form-group'><label >Answer</label><input name='answer' type='text' class='form-control' required='required' /> <p class='ans1'>Remove</p> </div>");
+                $('.ans').append("<div  class='form-group'><label >Answer</label><input name='answer' type='text' class='form-control' required='required' /> <p class='ans1'><a href=\"\" class=\"delete\" style=\"color: red;\" title=\"Delete answer\" data-toggle=\"tooltip\"><i class=\"fa fa-trash\"></i></a></p> </div>");
             });
 
 
@@ -77,10 +77,11 @@
                         <div class="form-group" th:each="answer:${answers}">
                             <label >Answer</label>
                             <input type="text" th:value="${answer.content}" name="answer"  class="form-control" placeholder="" required="required">
-                            <p class="ans1"> Remove</p>
+                            <p class="ans1">
+                                <a href="" class="delete" style="color: red;" title="Delete answer" data-toggle="tooltip"><i class="fa fa-trash"></i></a></p>
                         </div>
                     </div>
-                    <a id="add">Add answer</a>
+                    <a id="add"><button style="width: auto" class="btn btn-primary">Add answer</button> </a>
                     <div class="form-group">
                         <input style="background-color: #0a2f3f;" type="submit" class="btn btn-primary btn-block btn-lg" value="Edit">
                     </div>
