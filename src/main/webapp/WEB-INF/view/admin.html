@@ -173,6 +173,36 @@ table.table .avatar {
     margin-top: 10px;
     font-size: 13px;
 }
+    .example input[type=text] {
+        padding: 10px;
+        font-size: 17px;
+        border: 1px solid grey;
+        float: left;
+        width: 80%;
+        background: #f1f1f1;
+    }
+
+    .example button {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        background: #2196F3;
+        color: white;
+        font-size: 17px;
+        border: 1px solid grey;
+        border-left: none;
+        cursor: pointer;
+    }
+
+    .example button:hover {
+        background: #0b7dda;
+    }
+    .searchUser{
+        width: 60%;
+        margin: auto;
+    }
+
+
 </style>
 
 <script>
@@ -197,55 +227,49 @@ table.table .avatar {
 
 
 <!--================ Start Faq Area =================-->
-<div class="container-xl" style="background-color: #f2f2f2;">
-    <div class="table-responsive">
-        <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-5">
-                        <h2>User <b>Management</b></h2>
-                    </div>
+<form class="example" action="/" style="margin:auto;max-width:300px">
+    <input type="text" placeholder="Search by email" name="searchEMail">
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+<br><br>
+<div class="searchUser" style="display: none">
+    <table class="table table-striped table-hover" style="background-color: #f2f2f2;">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Group </th>
+            <th>Role</th>
 
-                </div>
-            </div>
-            <table class="table table-striped table-hover" style="background-color: #f2f2f2;">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Group </th>
-                    <th>Role</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><a href="#"><img src="/" class="avatar" alt="Avatar"> Michael Holz</a></td>
+            <td>SE-1963</td>
+            <td>Admin</td>
+            <td>
+                <a href="/editUser" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><a href="#"><img src="/" class="avatar" alt="Avatar"> Paula Wilson</a></td>
+            <td>TS-1923</td>
+            <td>Student</td>
+            <td>
+                <a href="/editUser" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
 
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><a href="#"><img src="/" class="avatar" alt="Avatar"> Michael Holz</a></td>
-                    <td>SE-1963</td>
-                    <td>Admin</td>
-                    <td>
-                        <a href="/editUser" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
-                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><a href="#"><img src="/" class="avatar" alt="Avatar"> Paula Wilson</a></td>
-                    <td>TS-1923</td>
-                    <td>Student</td>
-                    <td>
-                        <a href="/editUser" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
-                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
+        </tbody>
+    </table>
 
-                </tbody>
-            </table>
 
-        </div>
-    </div>
 </div>
 
 
