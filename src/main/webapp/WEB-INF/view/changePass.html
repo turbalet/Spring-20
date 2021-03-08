@@ -11,26 +11,28 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div th:replace="header"></div>
+
 <div class="modal-dialog modal-login">
     <div class="modal-content">
         <div class="well" style="margin: auto">
             <h4 style="text-align: center;margin: 10px">Change Password </h4>
-            <form th:action="@{/changePass}" method="post">
+            <form th:action="@{/profile/change-password}" method="post">
 
 
                 <div class="form-group" style="width: 300px">
                     <label >Old Password: </label>
-                    <input type="password"  class="form-control" name="oldPassword" placeholder="Old Password">
+                    <input type="password"  class="form-control" name="oldPass" placeholder="Old Password">
 
                 </div>
                 <div class="form-group" style="width: 300px">
                     <label >New Password: </label>
-                    <input type="password"  class="form-control" name="newPassword" placeholder="New Password">
+                    <input type="password"  class="form-control" name="newPass" placeholder="New Password">
 
                 </div>
                 <div class="form-group" style="width: 300px">
                     <label >Re-type New Password: </label>
-                    <input type="password"  class="form-control" name="reNewPassword" placeholder="New Password">
+                    <input type="password"  class="form-control" name="reNew" placeholder="New Password">
 
                 </div>
                 <button style="margin: auto" type="submit" class="btn btn-primary mb-2">Change Password</button>

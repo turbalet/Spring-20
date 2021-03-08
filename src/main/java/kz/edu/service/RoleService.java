@@ -16,8 +16,8 @@ public class RoleService implements IEntityService<Role> {
 
 
     @Override
-    public void add(Role entity) {
-        roleRepository.save(entity);
+    public Role add(Role entity) {
+        return roleRepository.save(entity);
     }
 
     @Override

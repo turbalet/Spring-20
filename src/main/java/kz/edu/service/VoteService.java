@@ -15,8 +15,8 @@ public class VoteService implements IEntityService<Vote> {
     private final VoteRepository voteRepository;
 
     @Override
-    public void add(Vote entity) {
-        voteRepository.save(entity);
+    public Vote add(Vote entity) {
+        return voteRepository.save(entity);
     }
 
     @Override

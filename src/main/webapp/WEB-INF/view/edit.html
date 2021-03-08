@@ -33,7 +33,7 @@
             });
 
             $('#add').click(function (){
-                $('.ans').append("<div  class='form-group'><label >Answer</label><input name='answer' type='text' class='form-control' required='required' /> <p class='ans1'><a href=\"\" class=\"delete\" style=\"color: red;\" title=\"Delete answer\" data-toggle=\"tooltip\"><i class=\"fa fa-trash\"></i></a></p> </div>");
+                $('.ans').append("<div  class='form-group'><label >Answer</label><input name='answer' type='text' class='form-control' required='required' /> <p class='ans1'><a  class=\"delete ans1 \" style=\"color: red;\" title=\"Delete answer\" data-toggle=\"tooltip\"><i class=\"fa fa-trash\"></i></a></p> </div>");
             });
 
 
@@ -44,6 +44,8 @@
     </script>
 </head>
 <body>
+<div th:replace="header"></div>
+
 <div >
 <!--    id="rowId' + rowId + '"-->
     <div class="modal-dialog modal-login">
@@ -51,6 +53,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">Edit question</h4>
                </div>
+            <p th:if="${questionMessage != null}" th:text="${questionMessage}"></p>
             <div class="modal-body">
                 <form  id="myForm" action="/admin/question/edit" method="post" >
 
@@ -78,7 +81,7 @@
                             <label >Answer</label>
                             <input type="text" th:value="${answer.content}" name="answer"  class="form-control" placeholder="" required="required">
                             <p class="ans1">
-                                <a href="" class="delete" style="color: red;" title="Delete answer" data-toggle="tooltip"><i class="fa fa-trash"></i></a></p>
+                                <a class="delete" style="color: red;" title="Delete answer" data-toggle="tooltip"><i class="fa fa-trash"></i></a></p>
                         </div>
                     </div>
                     <a id="add"><button style="width: auto" class="btn btn-primary">Add answer</button> </a>

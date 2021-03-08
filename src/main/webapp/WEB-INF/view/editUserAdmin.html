@@ -19,12 +19,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div th:replace="header"></div>
+
 <div >
     <div class="modal-dialog modal-login">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Edit User</h4>
             </div>
+            <p th:if="${message != null}" th:text="${message}"></p>
             <div class="modal-body">
                 <form th:action="@{/admin/user/edit}" method="post" th:object="${editedUser}">
 

@@ -206,8 +206,21 @@ table.table .avatar {
 </style>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function (){
         $('[data-toggle="tooltip"]').tooltip();
+
+        $('.ans1').click(function (){
+            $(this).closest('.form-group').remove();
+        });
+
+        $('#add').click(function (){
+            $('.ans').append("<div  class='form-group'><input name='answer' type='text' placeholder='Answer' class='form-control' required='required' /> <p class='ans1'><a  class=\"delete ans1 \" style=\"color: red;\" title=\"Delete answer\" data-toggle=\"tooltip\"><i class=\"fa fa-trash\"></i></a></p> </div>");
+        });
+
+
+    })
+    $(document).on('click','.ans1',function() {
+        $(this).closest("div").remove();
     });
 </script>
 
@@ -227,12 +240,14 @@ table.table .avatar {
 
 
 <!--================ Start Faq Area =================-->
-<form class="example" action="/" style="margin:auto;max-width:300px">
-    <input type="text" placeholder="Search by email" name="searchEMail">
+<form class="example" action="/admin/search" method="post" style="margin:auto;max-width:300px">
+    <input type="text" placeholder="Search by email" name="email">
     <button type="submit"><i class="fa fa-search"></i></button>
 </form>
 <br><br>
-<div class="searchUser" style="display: none">
+
+<div th:if="${message!=null}"><p th:text="${message}"></p></div>
+<div class="searchUser" th:if="${users != null}">
     <table class="table table-striped table-hover" style="background-color: #f2f2f2;">
         <thead>
         <tr>
@@ -245,27 +260,15 @@ table.table .avatar {
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr th:each="u : ${users}">
             <td>1</td>
-            <td><a href="#"><img src="/" class="avatar" alt="Avatar"> Michael Holz</a></td>
-            <td>SE-1963</td>
-            <td>Admin</td>
+            <td><a th:text="${u.firstName + ' ' + u.lastName}"><img src="/" class="avatar" alt="Avatar"> </a></td>
+            <td th:text="${u.group.name}">SE-1963</td>
+            <td th:text="${u.role.name}">Admin</td>
             <td>
-                <a href="/editUser" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
-                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
+                <a th:href="@{/admin/user/edit/{id}(id=${u.getId()})}" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
             </td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td><a href="#"><img src="/" class="avatar" alt="Avatar"> Paula Wilson</a></td>
-            <td>TS-1923</td>
-            <td>Student</td>
-            <td>
-                <a href="/editUser" class="settings" title="Settings" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
-                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
-            </td>
-        </tr>
-
         </tbody>
     </table>
 
@@ -289,6 +292,8 @@ table.table .avatar {
                         -->  </div>
                 </div>
             </div>
+            <div th:if="${questionMessage!=null}"><p th:text="${questionMessage}"></p></div>
+
             <table class="table table-striped table-hover" style="background-color: #f2f2f2;">
                 <thead>
                 <tr>
@@ -305,7 +310,7 @@ table.table .avatar {
                     <td th:text="${#dates.day(question.endDate) + ' ' + #dates.monthNameShort(question.endDate) + ' ' + #dates.year(question.endDate)}">A</td>
                     <td>
                         <a th:href="@{/admin/question/edit/{id}(id = ${question.id})}" class="settings" title="Edit" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
-                        <a href="" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
+                        <a th:href="@{/admin/question/delete/{id}(id = ${question.id})}" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
                 </tbody>
@@ -322,28 +327,32 @@ table.table .avatar {
                 <h4 class="modal-title">New voting question</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
+
             <div class="modal-body">
-                <form action="/" method="post">
+                <form action="/admin/question/add" method="post">
                     <div class="form-group">
 
-                        <input type="text" class="form-control" placeholder="Question" required="required">
+                        <input type="text" name="title" class="form-control" placeholder="Title" required="required">
+                    </div>
+                    <div class="ans">
+                        <div class="form-group">
+
+                        <input type="date" name="endDate" class="form-control" placeholder="End date" required="required">
                     </div>
                     <div class="form-group">
 
-                        <input type="text" class="form-control" placeholder="Answer1" required="required">
+                        <input type="text" name="description" class="form-control" placeholder="Description" required="required">
                     </div>
                     <div class="form-group">
 
-                        <input type="text" class="form-control" placeholder="Answer1" required="required">
-                    </div>
-                    <div class="form-group">
+                            <input type="text" name="answer" class="form-control" placeholder="Answer" required="required">
+                        </div>
+                        <div class="form-group">
 
-                        <input type="text" class="form-control" placeholder="Answer1" required="required">
+                            <input type="text" name="answer" class="form-control" placeholder="Answer" required="required">
+                        </div>
                     </div>
-                    <div class="form-group">
-
-                        <input type="text" class="form-control" placeholder="Answer1" required="required">
-                    </div>
+                    <a id="add"><button style="width: auto" class="btn btn-primary">Add answer</button> </a>
                     <div class="form-group">
                         <input style="background-color: #0a2f3f;" type="submit" class="btn btn-primary btn-block btn-lg" value="Submit">
                     </div>

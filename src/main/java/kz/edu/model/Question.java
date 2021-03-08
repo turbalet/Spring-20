@@ -35,4 +35,12 @@ public class Question {
 
     @Column(name = "description")
     private String description;
+
+    public Question(User user, String title, Date published, Date endDate, String description) {
+        this.user = user;
+        this.title = title;
+        this.published = published;
+        this.endDate = endDate;
+        this.description = description;
+    }
 }

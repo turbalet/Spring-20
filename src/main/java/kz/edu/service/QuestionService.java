@@ -17,8 +17,8 @@ public class QuestionService implements IEntityService<Question> {
     private final QuestionRepository questionRepository;
 
     @Override
-    public void add(Question entity) {
-        questionRepository.save(entity);
+    public Question add(Question entity) {
+        return questionRepository.save(entity);
     }
 
     @Override

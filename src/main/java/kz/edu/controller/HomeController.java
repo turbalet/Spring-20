@@ -13,7 +13,7 @@ import java.security.Principal;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("home")
+@RequestMapping("/home")
 public class HomeController {
 
     private final UserService userService;

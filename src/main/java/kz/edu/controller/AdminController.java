@@ -77,7 +77,6 @@ public class AdminController {
             @RequestParam("group") String groupName,
             Principal principal, Model model){
         User user = userService.getById(id);
-        model.addAttribute("message", "");
         try{
             user.setEmail(email);
             user.setRole(roleService.getByName(role));
@@ -86,6 +85,7 @@ public class AdminController {
             user.setBirthday(date);
             user.setGroup(groupService.getByName(groupName));
             userService.update(user);
+            model.addAttribute("message", "User was successfully edited");
         } catch (Exception e){
             model.addAttribute("message", "Couldn't edit user");
         }
@@ -102,13 +102,61 @@ public class AdminController {
                                @RequestParam("description") String description,
                                @RequestParam("answer") String[] answers,
                                 Principal principal, Model model){
-        System.out.println("SSS");
-        Question question = new Question(Long.parseLong(id), userService.getById(Long.parseLong(user)), title, published, endDate, description);
-        answerService.deleteByQuestionID(Long.parseLong(id));
-        for(String answer : answers){
-            answerService.add(new Answer(question, answer));
+        try {
+            Question question = new Question(Long.parseLong(id), userService.getById(Long.parseLong(user)), title, published, endDate, description);
+            answerService.deleteByQuestionID(Long.parseLong(id));
+            for (String answer : answers) {
+                answerService.add(new Answer(question, answer));
+            }
+            questionService.update(question);
+            model.addAttribute("questionMessage", "Question was successfully edited");
+        } catch (Exception e){
+            model.addAttribute("questionMessage", "Couldn't edit question");
         }
-        questionService.update(question);
         return loadEditQuestion(principal, model, Long.parseLong(id));
     }
+
+    @PostMapping("question/add")
+    public String addQuestion( @RequestParam("title") String title,
+                               @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+                               @RequestParam("description") String description,
+                               @RequestParam("answer") String[] answers,
+                               Principal principal, Model model){
+        User user = userService.getUserByEmail(principal.getName());
+        model.addAttribute("questionMessage", "Question was successfully added");
+        try{
+            Question question = new Question(user, title, new Date(), endDate, description);
+            question = questionService.add(question);
+            for(String answer : answers){
+                answerService.add(new Answer(question, answer));
+            }
+        } catch (Exception e){
+            model.addAttribute("questionMessage", "Error while adding question");
+        }
+        return adminPage(principal, model);
+    }
+
+    @PostMapping("/search")
+    public String searchUser(@RequestParam("email") String email, Principal principal, Model model){
+        User user = userService.getUserByEmail(email);
+        model.addAttribute("users", user);
+        if(user==null){
+            model.addAttribute("userMessage", "Couldn't find user with such email");
+        }
+        return adminPage(principal, model);
+    }
+
+    @GetMapping("question/delete/{id}")
+    public String deleteQuestion(@PathVariable("id") long id, Principal principal, Model model){
+        try{
+            questionService.delete(id);
+            model.addAttribute("questionMessage", "Question was removed");
+        }catch (Exception e){
+            model.addAttribute("questionMessage", "Error while deleting question");
+        }
+        return adminPage(principal, model);
+    }
+
+
+
 }

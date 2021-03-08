@@ -16,8 +16,8 @@ public class GroupService implements IEntityService<Group> {
 
 
     @Override
-    public void add(Group entity) {
-        groupRepository.save(entity);
+    public Group add(Group entity) {
+        return groupRepository.save(entity);
     }
 
     @Override

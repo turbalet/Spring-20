@@ -16,8 +16,8 @@ public class AnswerService implements IEntityService<Answer> {
     private final AnswerRepository answerRepository;
 
     @Override
-    public void add(Answer entity) {
-        answerRepository.save(entity);
+    public Answer add(Answer entity) {
+        return answerRepository.save(entity);
     }
 
     @Override

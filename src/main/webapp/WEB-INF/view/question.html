@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -150,6 +150,8 @@
     }
 </style>
 <body>
+<div th:replace="header"></div>
+
 <div class="wrapper bg-white rounded">
     <form action="/result" method="post">
         <div class="content">
