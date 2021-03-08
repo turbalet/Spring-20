@@ -44,6 +44,14 @@
     </script>
 </head>
 <body>
+<style>
+    .message{
+        text-align: center;
+        margin: auto;
+        color: green;
+        size: A4;
+    }
+</style>
 <div th:replace="header"></div>
 
 <div >
@@ -53,7 +61,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">Edit question</h4>
                </div>
-            <p th:if="${questionMessage != null}" th:text="${questionMessage}"></p>
+            <h5 class="message" th:if="${questionMessage != null}" th:text="${questionMessage}"></h5>
             <div class="modal-body">
                 <form  id="myForm" action="/admin/question/edit" method="post" >
 
