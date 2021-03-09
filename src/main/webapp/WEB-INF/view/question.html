@@ -170,8 +170,8 @@
 <body>
 <div th:replace="header"></div>
 <div class="row">
-    <div class="wrapper bg-white rounded" th:if="${question.endDate.after(#dates.createNow())}">
-        <form id="myForm" th:action="@{/question/vote}" method="post" th:if="${isVoted == false}">
+    <div style="width: 70%;padding: 10px" class="wrapper bg-white rounded" th:if="${question.endDate.after(#dates.createNow())}">
+        <form style="padding: 20px" id="myForm" th:action="@{/question/vote}" method="post" th:if="${isVoted == false}">
             <div class="content">
                 <p class="text-justify h5 pb-2 font-weight-bold" th:text="${question.title}">
                 </p>
@@ -213,10 +213,10 @@
 
 
 <!--    ---------------------------------- ----------------------->
-    <div class="wrapper bg-white rounded" th:if="${question.endDate.before(#dates.createNow())}">
+    <div style="padding: 20px" class="wrapper bg-white rounded" th:if="${question.endDate.before(#dates.createNow())}">
 
         <div class="card h-100 prog" >
-            <div class="card-body">
+            <div style="margin: 20px;padding: 20px" class="card-body">
                 <p class="text-justify h5 pb-2 font-weight-bold" th:text="${question.title}">
                 </p>
                 <p class="text-justify  pb-2" th:text="${question.description}"></p>
@@ -239,7 +239,7 @@
             </div>
         </div>
     </div>
-    <div class="wrapper bg-white rounded">
+    <div style="padding: 30px; margin-r: -80px" class="wrapper bg-white rounded">
         <div><p>End date: <span th:text="${#dates.day(question.endDate) + ' '  + #dates.monthNameShort(question.endDate)}"></span></p></div>
         <div><p>Votes: <span th:text="${count}"></span></p></div>
         <div th:if="${question.endDate.before(#dates.createNow())}"><p >Status: <span style="color: darkred">CLOSED</span></p></div>
