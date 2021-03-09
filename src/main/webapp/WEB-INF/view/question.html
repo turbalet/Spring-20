@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,6 +9,23 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+
+        $(document).ready(function (){
+
+            if($('.prog').length){
+                $('.progress-bar').each(function (){
+                    $(this).attr('aria-valuenow', $(this).next('p').text());
+                });
+            }
+
+
+
+
+        })
+
+
+    </script>
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
@@ -28,6 +45,7 @@
         max-width: 600px;
         margin: 20px auto
     }
+
 
     .content {
         padding: 20px;
@@ -151,38 +169,88 @@
 </style>
 <body>
 <div th:replace="header"></div>
-
-<div class="wrapper bg-white rounded">
-    <form action="/result" method="post">
-        <div class="content">
-            <p class="text-justify h5 pb-2 font-weight-bold">
-                Question Question Question Question Question Question Question Question ?
-            </p>
-            <div class="options py-3">
-                <label class="rounded p-2 option">
-                    Answer 1
-                    <input type="radio" name="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="rounded p-2 option">
-                    Answer 1
-                    <input type="radio" name="radio">
-                    <span class="checkmark"></span>
-
-                </label>
-                <label class="rounded p-2 option">
-                    Answer 1 <input type="radio" name="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="rounded p-2 option">
-                    Answer 1
-                    <input type="radio" name="radio">
-                    <span class="checkmark"></span>
-                </label>
+<div class="row">
+    <div class="wrapper bg-white rounded" th:if="${question.endDate.after(#dates.createNow())}">
+        <form id="myForm" th:action="@{/question/vote}" method="post" th:if="${isVoted == false}">
+            <div class="content">
+                <p class="text-justify h5 pb-2 font-weight-bold" th:text="${question.title}">
+                </p>
+                <p class="text-justify  pb-2" th:text="${question.description}"></p>
+                <input type="number" name="questionId" th:value="${question.id}"  hidden>
+                <div class="options py-3">
+                    <label  class="rounded p-2 option" th:each="answer : ${answers}">
+                        <p th:text="${answer.content}"></p>
+                        <input type="radio" name="answer" th:value="${answer.id}">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div> <input type="submit" value="Submit Answer" class="mx-sm-0 mx-1">
+        </form>
+        <div class="card h-100 prog" th:if="${isVoted == true}">
+            <div class="card-body">
+                <p class="text-justify h5 pb-2 font-weight-bold" th:text="${question.title}">
+                </p>
+                <p class="text-justify  pb-2" th:text="${question.description}"></p>
+                <div class="pr" th:each="ansStat : ${statistic.answers}" >
+                    <p th:if="${ansStat.key.id==userVote.answer.id}" style="font-weight: bold; text-decoration: underline;"  th:text="${ansStat.key.content}"></p>
+                    <p th:if="${ansStat.key.id!=userVote.answer.id}" style="color: gray" th:text="${ansStat.key.content}"></p>
+                    <div class="progress" style="height: 20px; margin-top: -15px">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated text-center"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <p th:if="${ansStat.key.id==userVote.answer.id}" style="padding-top: 15px; font-weight: bold" th:text="${(((ansStat.value*100)/count)) + '%'}"><span></span></p>
+                            <p th:if="${ansStat.key.id!=userVote.answer.id}" style="padding-top: 15px" th:text="${(((ansStat.value*100)/count)) + '%'}"><span></span></p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div style="margin-top: 30px;">
+                    <a th:href="@{/question/vote/delete/{id}(id=${userVote.getVoteId()})}">
+                        <button style="width: auto" type="submit" class="btn btn-primary">Remove my vote</button>
+                    </a>
+                </div>
             </div>
-        </div> <input type="submit" value="Submit Answer" class="mx-sm-0 mx-1">
-    </form>
+        </div>
+    </div>
 
+
+<!--    ---------------------------------- ----------------------->
+    <div class="wrapper bg-white rounded" th:if="${question.endDate.before(#dates.createNow())}">
+
+        <div class="card h-100 prog" >
+            <div class="card-body">
+                <p class="text-justify h5 pb-2 font-weight-bold" th:text="${question.title}">
+                </p>
+                <p class="text-justify  pb-2" th:text="${question.description}"></p>
+                <div class="pr" th:each="ansStat : ${statistic.answers}" >
+                    <div th:if="${userVote!=null}">
+                        <p th:if="${ansStat.key.id==userVote.answer.id}" style="font-weight: bold; text-decoration: underline;"  th:text="${ansStat.key.content}"></p>
+                        <p th:if="${ansStat.key.id!=userVote.answer.id}" style="color: gray" th:text="${ansStat.key.content}"></p>
+                    </div>
+                    <div th:if="${userVote==null}">
+                        <p style="color: gray" th:text="${ansStat.key.content}"></p>
+                    </div>
+                        <div class="progress" style="height: 20px; margin-top: -15px">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated text-center"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <p th:if="${ansStat.key.id==userVote.answer.id}" style="padding-top: 15px; font-weight: bold" th:text="${(((ansStat.value*100)/count)) + '%'}"><span></span></p>
+                            <p th:if="${ansStat.key.id!=userVote.answer.id}" style="padding-top: 15px" th:text="${(((ansStat.value*100)/count)) + '%'}"><span></span></p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper bg-white rounded">
+        <div><p>End date: <span th:text="${#dates.day(question.endDate) + ' '  + #dates.monthNameShort(question.endDate)}"></span></p></div>
+        <div><p>Votes: <span th:text="${count}"></span></p></div>
+        <div th:if="${question.endDate.before(#dates.createNow())}"><p >Status: <span style="color: darkred">CLOSED</span></p></div>
+        <div th:if="${question.endDate.after(#dates.createNow())}"><p >Status: <span style="color: darkgreen">ACTIVE</span></p></div>
+        <hr>
+        <div class="statistic m-5" th:each="groupVote : ${groupVotes}">
+            <div>
+                <p><span th:text="${groupVote.user.firstName + ' ' + groupVote.user.lastName}"></span> voted for <span th:text="${groupVote.answer.content}"></span></p>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

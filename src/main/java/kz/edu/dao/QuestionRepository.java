@@ -4,10 +4,14 @@ import kz.edu.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     List<Question> findAllQuestionByOrderByPublishedDesc();
     List<Question> findAllByUserId(long id);
+    List<Question> findAllByEndDateIsGreaterThanEqual(Date date);
+    List<Question> findAllByEndDateIsLessThan(Date date);
+
 }
