@@ -47,16 +47,17 @@ public class QuestionPageController {
                 if(isVoted){
                     Vote vote = voteService.getUserVote(question.getId(), user.getId());
                     model.addAttribute("userVote", vote);
-                    Map<Answer, Integer> ans = new HashMap<>();
-                    for(Answer answer: answers){
-                        ans.put(answer, voteService.getVoteCountByAnswer(answer.getId()));
-                    }
-                    Statistic statistic = new Statistic(question, ans, votes.size());
-                    model.addAttribute("statistic", statistic);
+
                 }else {
                     model.addAttribute("userVote", new Vote());
                 }
+                Map<Answer, Integer> ans = new HashMap<>();
+                for(Answer answer: answers){
+                    ans.put(answer, voteService.getVoteCountByAnswer(answer.getId()));
+                }
+                Statistic statistic = new Statistic(question, ans, votes.size());
                 model.addAttribute("isVoted", isVoted);
+                model.addAttribute("statistic", statistic);
             }
         } catch (Exception e){
 
