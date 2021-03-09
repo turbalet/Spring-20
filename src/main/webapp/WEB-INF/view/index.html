@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -17,39 +17,13 @@
 <body>
 
 <!--================Header Menu Area =================-->
-<header class="header_area">
-    <div class="main_menu">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
+<div th:replace="header"></div>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/admin">Admin page</a></li>
-                    </ul>
-                </div>
-                <div class="right-button">
-                    <ul>
-                        <li><a class="sign_up" href="">Sign Up</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
 <!--================Header Menu Area =================-->
 
 <!--================Hero Banner Area Start =================-->
 <section class="hero-banner d-flex align-items-center">
-    <div class="container text-center"><h2>Valid votes</h2></div>
+    <div class="container text-center"><h2>Actual polls</h2></div>
 </section>
 <!--================Hero Banner Area End =================-->
 
@@ -57,16 +31,9 @@
 <!--================  actual Question List  =================-->
 <div style="width: 500px; margin-left: auto; margin-right: auto;" >
     <ul class="list-group" >
-        <a href="/question/1" style="color: #0a2f3f">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Question1
+        <a th:each="act : ${actual}" th:href="@{/question/{id}(id=${act.id})}" style="color: #0a2f3f">
+            <li th:text="${act.title}" class="list-group-item d-flex justify-content-between align-items-center">
                 <span class="badge badge-primary badge-pill">14</span>
-            </li>
-        </a>
-        <a href="/question/1" style="color: #0a2f3f">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Question2
-                <span class="badge badge-primary badge-pill">2</span>
             </li>
         </a>
     </ul>
@@ -75,19 +42,12 @@
 <br> <br><br><hr>
 
 <!--================not actual question List  =================-->
-<div class="container text-center"><h2>non-valid votes</h2></div>
+<div class="container text-center"><h2>Outdated polls</h2></div>
 <div style="width: 500px; margin-left: auto; margin-right: auto;" >
     <ul class="list-group" >
-        <a href="/question/1" style="color: #0a2f3f">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Question1
+        <a th:each="out : ${outdated}" th:href="@{/question/{id}(id=${out.id})}" style="color: #0a2f3f">
+            <li th:text="${out.title}" class="list-group-item d-flex justify-content-between align-items-center">
                 <span class="badge badge-primary badge-pill">14</span>
-            </li>
-        </a>
-        <a href="/question/1" style="color: #0a2f3f">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Question2
-                <span class="badge badge-primary badge-pill">2</span>
             </li>
         </a>
     </ul>

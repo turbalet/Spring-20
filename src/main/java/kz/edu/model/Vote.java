@@ -36,4 +36,13 @@ public class Vote {
 
     @Column(name = "updated")
     private Date updated;
+
+
+    public Vote(Question question, Answer answer, User user, Date created, Date updated) {
+        this.question = question;
+        this.answer = answer;
+        this.user = user;
+        this.created = created;
+        this.updated = updated;
+    }
 }

@@ -7,6 +7,7 @@ import kz.edu.service.interfaces.IEntityService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -45,4 +46,12 @@ public class QuestionService implements IEntityService<Question> {
         questionRepository.deleteById(id);
     }
 
+
+    public List<Question> getAllOutdated(){
+        return questionRepository.findAllByEndDateIsGreaterThanEqual(new Date());
+    }
+
+    public List<Question> getAllActual(){
+        return questionRepository.findAllByEndDateIsLessThan(new Date());
+    }
 }
